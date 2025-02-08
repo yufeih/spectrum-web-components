@@ -252,7 +252,7 @@ export class Combobox extends Textfield {
         this.availableOptions = (this.options || this.optionEls).filter(
             (descendant) => {
                 const itemTextLowerCase = descendant.itemText.toLowerCase();
-                return itemTextLowerCase.startsWith(valueLowerCase);
+                return itemTextLowerCase.includes(valueLowerCase);
             }
         );
     }

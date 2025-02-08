@@ -1,5 +1,5 @@
 {
-    "name": "@spectrum-web-components/combobox",
+    "name": "@yufeih/combobox",
     "version": "1.1.0",
     "publishConfig": {
         "access": "public"

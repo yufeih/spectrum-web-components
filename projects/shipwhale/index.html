@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@shipwhale/ui</title>
+    <script type="module" src="/src/index.ts"></script>
+  </head>
+  <body style="margin: 0; padding: 0">
+    <sp-theme
+      system="express"
+      color="dark"
+      scale="medium"
+      style="
+        background-color: var(--spectrum-gray-50);
+        color: var(--spectrum-gray-800);
+        width: 100dvw;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      "
+    >
+      <sp-avatar size="100" label="Demo User" src="https://picsum.photos/500/500"></sp-avatar>
+
+      <local-time date="2021-09-01T12:00:00Z"></local-time>
+      <sp-button onclick="console.log('Themed <sp-button> clicked!')"> Click me! </sp-button>
+      <div style="display: flex; gap: var(--spectrum-spacing-75)">
+        <sp-badge size="m">Label</sp-badge>
+        <sp-icon name="ui:Arrow100"></sp-icon>
+        <sp-icon name="checkmark-circle" slot="icon"></sp-icon>
+        <sp-badge size="m">
+          <sp-icon-checkmark-circle slot="icon"></sp-icon-checkmark-circle>
+          Icon and label
+        </sp-badge>
+      </div>
+      <sp-combobox id="combo1" size="m" label="Color" autocomplete="list">
+        <sp-menu-item value="red">Red</sp-menu-item>
+        <sp-menu-item value="green">Green</sp-menu-item>
+        <sp-menu-item value="blue">Blue</sp-menu-item>
+      </sp-combobox>
+      <div>This is an <sp-link href="#">example link</sp-link>.</div>
+      <sp-number-field label="Size" value="1024" size="m" style="--spectrum-stepper-width: 110px"></sp-number-field>
+
+      <sp-action-button size="s">
+        <sp-icon-info slot="icon"></sp-icon-info>
+        <sp-tooltip self-managed placement="right"> Display something here </sp-tooltip>
+      </sp-action-button>
+
+      <sp-field-group>
+        <div>
+          <sp-field-label for="picker-m" size="m">Selection type:</sp-field-label>
+          <sp-picker quiet id="picker-m" size="m" label="Selection type">
+            <sp-menu-item>Deselect</sp-menu-item>
+            <sp-menu-item>Select inverse</sp-menu-item>
+            <sp-menu-item>Feather...</sp-menu-item>
+            <sp-menu-item>Select and mask...</sp-menu-item>
+            <sp-menu-divider></sp-menu-divider>
+            <sp-menu-item>Save selection</sp-menu-item>
+            <sp-menu-item disabled>Make work path</sp-menu-item>
+          </sp-picker>
+        </div>
+        <div>
+          <sp-field-label size="m" for="size-m">Password</sp-field-label>
+          <sp-textfield size="m" id="size-m" type="password">
+            <sp-help-text size="m" slot="help-text"> Create a password with at least 8 characters. </sp-help-text>
+          </sp-textfield>
+        </div>
+        <div>
+          <sp-field-label for="name-1" required>Name</sp-field-label>
+          <sp-textfield id="name-1" placeholder="Enter your name" valid value="My Name"></sp-textfield>
+        </div>
+      </sp-field-group>
+
+      <div style="height: 150px">
+        <sp-table style="height: 100%" selects="multiple" selected='["row1", "row2"]' onchange="console.log(event)">
+          <sp-table-head>
+            <sp-table-head-cell>Column Title</sp-table-head-cell>
+            <sp-table-head-cell>Column Title</sp-table-head-cell>
+            <sp-table-head-cell>Column Title</sp-table-head-cell>
+          </sp-table-head>
+          <sp-table-body style="overflow: auto">
+            <sp-table-row value="row1">
+              <sp-table-cell>Row Item Alpha</sp-table-cell>
+              <sp-table-cell>Row Item Alpha</sp-table-cell>
+              <sp-table-cell>Row Item Alpha</sp-table-cell>
+            </sp-table-row>
+            <sp-table-row value="row2">
+              <sp-table-cell>Row Item Bravo</sp-table-cell>
+              <sp-table-cell>Row Item Bravo</sp-table-cell>
+              <sp-table-cell>Row Item Bravo</sp-table-cell>
+            </sp-table-row>
+            <sp-table-row value="row3">
+              <sp-table-cell>Row Item Charlie</sp-table-cell>
+              <sp-table-cell>Row Item Charlie</sp-table-cell>
+              <sp-table-cell>Row Item Charlie</sp-table-cell>
+            </sp-table-row>
+            <sp-table-row value="row4">
+              <sp-table-cell>Row Item Delta<sp-textfield quiet onclick="event.stopPropagation()"></sp-textfield></sp-table-cell>
+              <sp-table-cell><sp-textfield quiet onclick="event.stopPropagation()"></sp-textfield></sp-table-cell>
+              <sp-table-cell>Row Item Delta</sp-table-cell>
+            </sp-table-row>
+            <sp-table-row value="row5">
+              <sp-table-cell>Row Item Echo</sp-table-cell>
+              <sp-table-cell>Row Item Echo</sp-table-cell>
+              <sp-table-cell>Row Item Echo<sp-button onclick="event.stopPropagation()">add</sp-button></sp-table-cell>
+            </sp-table-row>
+          </sp-table-body>
+        </sp-table>
+      </div>
+    </sp-theme>
+  </body>
+</html>

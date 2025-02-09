@@ -72,3 +72,13 @@ sp-popover:not(sp-overlay sp-popover) {
     width: 1px;
     white-space: nowrap;
 }
+
+sp-clear-button {
+    position: absolute;
+    inset-inline-end: calc(
+        var(
+                --mod-combobox-button-inline-offset,
+                var(--spectrum-combobox-button-inline-offset)
+            ) * -1
+    );
+}

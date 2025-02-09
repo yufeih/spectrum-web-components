@@ -33,6 +33,7 @@ import '@spectrum-web-components/icons-ui/icons/sp-icon-chevron100.js';
 import '@spectrum-web-components/popover/sp-popover.js';
 import '@spectrum-web-components/menu/sp-menu.js';
 import '@spectrum-web-components/menu/sp-menu-item.js';
+import '@spectrum-web-components/button/sp-clear-button.js';
 import { PendingStateController } from '@spectrum-web-components/reactive-controllers/src/PendingState.js';
 import '@spectrum-web-components/picker-button/sp-picker-button.js';
 import { Textfield } from '@spectrum-web-components/textfield';
@@ -439,22 +440,32 @@ export class Combobox extends Textfield {
 
         return html`
             ${super.render()}
-            <sp-picker-button
-                aria-controls="listbox-menu"
-                aria-describedby="${this.helpTextId} tooltip"
-                aria-expanded=${this.open ? 'true' : 'false'}
-                aria-label=${ifDefined(this.label || this.appliedLabel)}
-                aria-labelledby="applied-label label"
-                @click=${this.toggleOpen}
-                tabindex="-1"
-                class="button ${this.focused
-                    ? 'focus-visible is-keyboardFocused'
-                    : ''}"
-                ?disabled=${this.disabled}
-                ?focused=${this.focused}
-                ?quiet=${this.quiet}
-                size=${this.size}
-            ></sp-picker-button>
+            ${this.value
+                ? html`
+                      <sp-clear-button
+                          @click=${() => (this.value = '')}
+                      ></sp-clear-button>
+                  `
+                : html`
+                      <sp-picker-button
+                          aria-controls="listbox-menu"
+                          aria-describedby="${this.helpTextId} tooltip"
+                          aria-expanded=${this.open ? 'true' : 'false'}
+                          aria-label=${ifDefined(
+                              this.label || this.appliedLabel
+                          )}
+                          aria-labelledby="applied-label label"
+                          @click=${this.toggleOpen}
+                          tabindex="-1"
+                          class="button ${this.focused
+                              ? 'focus-visible is-keyboardFocused'
+                              : ''}"
+                          ?disabled=${this.disabled}
+                          ?focused=${this.focused}
+                          ?quiet=${this.quiet}
+                          size=${this.size}
+                      ></sp-picker-button>
+                  `}
             <sp-overlay
                 ?open=${this.open}
                 .triggerElement=${this.input}

@@ -33,6 +33,7 @@ import '@spectrum-web-components/icons-ui/icons/sp-icon-chevron100.js';
 import '@spectrum-web-components/popover/sp-popover.js';
 import '@spectrum-web-components/menu/sp-menu.js';
 import '@spectrum-web-components/menu/sp-menu-item.js';
+import '@spectrum-web-components/divider/sp-divider.js';
 import '@spectrum-web-components/button/sp-clear-button.js';
 import { PendingStateController } from '@spectrum-web-components/reactive-controllers/src/PendingState.js';
 import '@spectrum-web-components/picker-button/sp-picker-button.js';
@@ -494,7 +495,7 @@ export class Combobox extends Textfield {
                         this.itemValue
                             ? [this.itemValue]
                             : []}
-                        style="min-width: ${width}px;"
+                        style="min-width: ${width}px; flex: 1"
                         size=${this.size}
                     >
                         ${this.overlayOpen
@@ -527,6 +528,8 @@ export class Combobox extends Textfield {
                             @slotchange=${this.handleSlotchange}
                         ></slot>
                     </sp-menu>
+                    ${this.querySelector('[slot="more"]')
+                        ? html`<sp-divider></sp-divider><slot name="more"></slot>` : html``}
                 </sp-popover>
             </sp-overlay>
             ${this.renderAppliedLabel()}

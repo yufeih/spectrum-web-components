@@ -25,6 +25,8 @@ import cornerTriangleStyles from '@spectrum-web-components/icon/src/spectrum-ico
 import cornerTriangleOverrides from '@spectrum-web-components/icon/src/icon-corner-triangle-overrides.css.js';
 import '@spectrum-web-components/icons-ui/icons/sp-icon-corner-triangle300.js';
 
+import { PendingStateController } from '@spectrum-web-components/reactive-controllers/src/PendingState.js';
+
 const holdAffordanceClass = {
     xs: 'spectrum-UIIcon-CornerTriangle75',
     s: 'spectrum-UIIcon-CornerTriangle75',
@@ -120,9 +122,19 @@ export class ActionButton extends SizedMixin(ButtonBase, {
         return (this.textContent || /* c8 ignore next */ '').trim();
     }
 
+    @property({ type: String, attribute: 'pending-label' })
+    public pendingLabel = 'Pending';
+
+    // Use this property to set the button into a pending state
+    @property({ type: Boolean, reflect: true, attribute: true })
+    public pending = false;
+
+    public pendingStateController: PendingStateController<this>;
+
     constructor() {
         super();
         this.addEventListener('click', this.onClick);
+        this.pendingStateController = new PendingStateController(this);
     }
 
     private onClick = (): void => {
@@ -276,6 +288,20 @@ export class ActionButton extends SizedMixin(ButtonBase, {
                 this.handlePointerupHoldAffordance();
             }
         }
+    }
+    
+    protected override firstUpdated(changes: PropertyValues<this>): void {
+        super.firstUpdated(changes);
+        if (this.pending) {
+            this.pendingStateController.hostUpdated();
+        }
+    }
+
+    protected override renderButton(): TemplateResult {
+        return html`
+            ${this.pendingStateController.renderPendingState()}
+            ${this.buttonContent}
+        `;
     }
 }
 
